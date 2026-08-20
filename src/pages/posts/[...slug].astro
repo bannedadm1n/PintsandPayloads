@@ -1,0 +1,29 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<Layout title={post.data.title} description={post.data.description}>
+  <article class="article wrap">
+    <a class="back" href="/">← Back to the pub</a>
+    <div class="article-meta">
+      <span>{post.data.category}</span>
+      <span>{post.data.pubDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+    </div>
+    <h1>{post.data.title}</h1>
+    <p class="article-lede">{post.data.description}</p>
+    <div class="tags">
+      {post.data.tags.map((tag) => <span>#{tag}</span>)}
+    </div>
+    <div class="prose article-body">
+      <Content />
+    </div>
+  </article>
+</Layout>

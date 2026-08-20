@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<Layout description="Simple conversations about security. Pints, payloads, red teaming and cyber security ramblings.">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">CYBER SECURITY / RED TEAMING / RAMBLINGS</div>
+        <h1>Security is easier to understand<br /><em>over a pint.</em></h1>
+        <p class="lede">A place for practical security stories, red team lessons, social engineering, technical rabbit holes and things that are easier to explain without the corporate jargon.</p>
+        <a class="button" href="#latest">Read the ramblings ↓</a>
+      </div>
+      <div class="hero-card">
+        <div class="terminal-top"><span></span><span></span><span></span></div>
+        <pre><code>$ whoami
+red_team_operator
+
+$ cat /etc/motd
+"Keep it simple.
+ Make it interesting."
+
+$ drink
+pint --payload</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="latest" class="section wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">THE LATEST</div>
+        <h2>From the pub table</h2>
+      </div>
+      <span class="count">{posts.length} posts</span>
+    </div>
+
+    <div class="posts">
+      {posts.map((post, index) => (
+        <a class:list={["post", index === 0 && "featured"]} href={`/posts/${post.id}/`}>
+          <div class="post-meta">
+            <span>{post.data.category}</span>
+            <span>{post.data.pubDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+          </div>
+          <h3>{post.data.title}</h3>
+          <p>{post.data.description}</p>
+          <div class="read">Read it <span>→</span></div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="manifesto">
+    <div class="wrap manifesto-inner">
+      <div class="eyebrow">THE IDEA</div>
+      <h2>No buzzwords.<br />Just good security chat.</h2>
+      <p>Cyber security can get buried under acronyms, frameworks and corporate speak. Pints & Payloads is about stripping that away and talking about what actually happens when people test systems for a living.</p>
+    </div>
+  </section>
+</Layout>
