@@ -1,4 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-<rect width="64" height="64" rx="32" fill="#181815"/>
-<text x="32" y="37" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="white">P&amp;P</text>
+  <rect width="64" height="64" rx="8" fill="#050607"/>
+  <path d="M14 20h8l8 12-8 12h-8l8-12z" fill="#54ff63"/>
+  <text x="34" y="39" font-family="monospace" font-size="17" font-weight="700" fill="#f3f8f5">P</text>
+  <rect x="47" y="40" width="7" height="2" fill="#ff3b9d"/>
 </svg>

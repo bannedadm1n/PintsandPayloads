@@ -5,7 +5,7 @@ interface Props {
   title?: string;
   description?: string;
 }
-const { title = 'Pints & Payloads', description = 'Simple conversations about security.' } = Astro.props;
+const { title = 'Pints & Payloads', description = 'Real stories. Real offsec. No buzzwords.' } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -13,20 +13,22 @@ const { title = 'Pints & Payloads', description = 'Simple conversations about se
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#050607" />
     <link rel="icon" href="/favicon.svg" />
     <title>{title} — Pints & Payloads</title>
   </head>
   <body>
+    <div class="noise" aria-hidden="true"></div>
     <header class="site-header">
       <div class="wrap nav">
         <a class="brand" href="/">
-          <span class="brand-mark">P&P</span>
-          <span>Pints <b>&</b> Payloads</span>
+          <span class="prompt">root@pintsandpayloads:~$</span>
+          <span class="brand-name">PINTS &amp; PAYLOADS<span class="cursor">_</span></span>
         </a>
-        <nav>
-          <a href="/#latest">Latest</a>
-          <a href="/about">About</a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <nav aria-label="Primary navigation">
+          <a href="/">[_HOME]</a>
+          <a href="/#latest">[_BLOG]</a>
+          <a href="/about">[_ABOUT]</a>
         </nav>
       </div>
     </header>
@@ -34,10 +36,10 @@ const { title = 'Pints & Payloads', description = 'Simple conversations about se
     <footer>
       <div class="wrap footer-inner">
         <div>
-          <div class="footer-brand">Pints & Payloads</div>
-          <p>Cyber security, red teaming, social engineering and the occasional bad idea.</p>
+          <div class="footer-brand">PINTS &amp; PAYLOADS_</div>
+          <p>Real stories. Real offsec. No buzzwords.</p>
         </div>
-        <div class="footer-right">© {new Date().getFullYear()} Pints & Payloads</div>
+        <div class="footer-right">// {new Date().getFullYear()} · EOF</div>
       </div>
     </footer>
   </body>

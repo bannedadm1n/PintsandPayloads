@@ -5,59 +5,74 @@ import Layout from '../layouts/Layout.astro';
 const posts = (await getCollection('posts', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<Layout description="Simple conversations about security. Pints, payloads, red teaming and cyber security ramblings.">
+<Layout description="Red teaming, social engineering, offensive security and the odd rambling over a pint.">
   <section class="hero">
     <div class="wrap hero-grid">
-      <div>
-        <div class="eyebrow">CYBER SECURITY / RED TEAMING / RAMBLINGS</div>
-        <h1>Security is easier to understand<br /><em>over a pint.</em></h1>
-        <p class="lede">A place for practical security stories, red team lessons, social engineering, technical rabbit holes and things that are easier to explain without the corporate jargon.</p>
-        <a class="button" href="#latest">Read the ramblings ↓</a>
+      <div class="hero-copy">
+        <div class="eyebrow">// CYBER_SECURITY_LOG :: ONLINE</div>
+        <h1><span class="chev">&gt;</span> PINTS &amp;<br /><span>PAYLOADS_</span></h1>
+        <p class="hero-tagline">Real stories. Real offsec. <strong>No buzzwords.</strong></p>
+        <p class="lede">Red team tradecraft, social engineering, physical security, technical rabbit holes and the occasional questionable idea — written like security people actually talk.</p>
+        <a class="button" href="#latest">&gt; VIEW LATEST POSTS</a>
       </div>
-      <div class="hero-card">
-        <div class="terminal-top"><span></span><span></span><span></span></div>
-        <pre><code>$ whoami
+
+      <div class="terminal-shell">
+        <div class="terminal-top">
+          <span></span><span></span><span></span>
+          <div>bash — pintsandpayloads</div>
+        </div>
+        <pre><code><span class="green">$</span> whoami
 red_team_operator
 
-$ cat /etc/motd
+<span class="green">$</span> cat /etc/motd
 "Keep it simple.
  Make it interesting."
 
-$ drink
-pint --payload</code></pre>
+<span class="green">$</span> drink
+pint --payload<span class="blink">█</span></code></pre>
       </div>
+    </div>
+    <div class="hero-status wrap">
+      <span>&gt; tail -f /var/log/ramblings.log</span>
+      <span class="status-online">● LIVE</span>
     </div>
   </section>
 
   <section id="latest" class="section wrap">
     <div class="section-head">
       <div>
-        <div class="eyebrow">THE LATEST</div>
-        <h2>From the pub table</h2>
+        <div class="eyebrow">// LATEST_FROM_THE_BLOG</div>
+        <h2>Recent transmissions</h2>
       </div>
-      <span class="count">{posts.length} posts</span>
+      <span class="count">{String(posts.length).padStart(2,'0')} ENTRIES</span>
     </div>
 
     <div class="posts">
       {posts.map((post, index) => (
         <a class:list={["post", index === 0 && "featured"]} href={`/posts/${post.id}/`}>
+          <div class="post-corners" aria-hidden="true"></div>
           <div class="post-meta">
-            <span>{post.data.category}</span>
-            <span>{post.data.pubDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+            <span>_{post.data.category.replaceAll(' ', '_').toUpperCase()}</span>
+            <span>{post.data.pubDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase()}</span>
           </div>
           <h3>{post.data.title}</h3>
           <p>{post.data.description}</p>
-          <div class="read">Read it <span>→</span></div>
+          <div class="read">READ MORE <span>→</span></div>
         </a>
       ))}
     </div>
   </section>
 
   <section class="manifesto">
-    <div class="wrap manifesto-inner">
-      <div class="eyebrow">THE IDEA</div>
-      <h2>No buzzwords.<br />Just good security chat.</h2>
-      <p>Cyber security can get buried under acronyms, frameworks and corporate speak. Pints & Payloads is about stripping that away and talking about what actually happens when people test systems for a living.</p>
+    <div class="wrap manifesto-grid">
+      <div>
+        <div class="eyebrow">// ABOUT_THIS_NODE</div>
+        <h2>No conference voice.<br /><span>No vendor fluff.</span></h2>
+      </div>
+      <div class="manifesto-copy">
+        <p>Pints &amp; Payloads is where I dump the interesting bits: offensive security, physical assessments, social engineering, Active Directory, cloud and whatever rabbit hole I fell into that week.</p>
+        <p class="command">$ printf "stay curious. break responsibly.\n"</p>
+      </div>
     </div>
   </section>
 </Layout>
